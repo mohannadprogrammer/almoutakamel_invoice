@@ -3,7 +3,8 @@
 
     <template id="moutakamel_extenal_layout" name="moutakamel_extenal_layout">
         <div class="header" style="width:100%">
-            <div class="row" style="width:100%; border-bottom: 1px solid black; padding-bottom: 10px;">
+            <div class="row"
+                style="width:100%; border-bottom: 1px solid black; padding-bottom: 10px;">
                 <div class="col-4" style="top-padding: 10px;">
                     <div class="w-150">
                         <strong>Omair Abdullah Sulaiman Al- Tuwaijri Est. for Machinery and
@@ -31,7 +32,7 @@
                     </div>
 
                 </div>
-                
+
             </div>
         </div>
         <t t-set="layout_background_url"
@@ -48,13 +49,27 @@
             <t t-out="0" />
         </div>
         <!-- Footer Template -->
-        <div t-attf-class="footer o_boxed_footer o_company_#{company.id}_layout">
+        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
             <div class="text-center">
-                <div t-field="company.report_footer" style="border: 2px solid black"> Company Report Footer</div>
+                <div t-field="company.report_footer"
+                    style="border: 2px solid black ; font-style:bold;"> Company Report Footer</div>
                 <div t-if="report_type == 'pdf'">
-                    Page: <span class="page"/> / <span class="topage"/>
+                    <div class="row" style="font-size: 11px; color: black;">
+                        <div class="col-4">
+                            <span class="page" /> / <span class="topage" />
+                        </div>
+                        <div class="col-4" >
+                              User : <t t-out="user.name"/>
+                        </div>
+                        
+                        
+                        <div class="col-4">
+                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                        </div>
+
+                    </div>
                 </div>
-                
+
             </div>
         </div>
     </template>
