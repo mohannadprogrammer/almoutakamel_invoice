@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="moutakamel_extenal_layout" name="moutakamel_extenal_layout">
+        <div class="header" style="width:100%">
+            <div class="row" style="width:100%; border-bottom: 1px solid black; padding-bottom: 10px;">
+                <div class="col-4" style="top-padding: 10px;">
+                    <div class="w-150">
+                        <strong>Omair Abdullah Sulaiman Al- Tuwaijri Est. for Machinery and
+                            Equipment</strong>
+                        <div>Riyadh City - Thuleem Dist. - Omar Al</div>
+                        <div>Mukhtar St.-3139-7436-12646-RCSB3139</div>
+                        <div>C.R: 1010822933</div>
+                        <div>VAT: 311392223300003</div>
+                    </div>
+                </div>
+                <div class="col-4"
+                    style=" green; top-padding: 10px; text-align: center; vertical-align: middle;">
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                        style="max-height: 75px; " alt="Logo" />
+
+                </div>
+                <div class="col-4" style="  top-padding: 10px;">
+                    <div class="w-150 " dir="rtl">
+                        <strong>مؤسسة عمير عبدالله سليمان التويجري</strong>
+                        <div>مدينة الرياض - حي ثليم </div>
+                        <div> شارع عمر المختار - 3139
+                            RCSB3139-12646-7436-</div>
+                        <div>س.ت: 1010822933</div>
+                        <div>الرقم الضريبي: 311392223300003</div>
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>
+        <t t-set="layout_background_url"
+            t-value="'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''" />
+        <div
+            t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}"
+            t-attf-style="{{ 'background-image: url(%s);' % layout_background_url if layout_background_url else '' }}"
+            t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+            t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <div class="pt-5">
+                <!-- This div ensures that the address is not cropped by the header. -->
+                <t t-call="web.address_layout" />
+            </div>
+            <t t-out="0" />
+        </div>
+        <!-- Footer Template -->
+        <div t-attf-class="footer o_boxed_footer o_company_#{company.id}_layout">
+            <div class="text-center">
+                <div t-field="company.report_footer" style="border: 2px solid black"> Company Report Footer</div>
+                <div t-if="report_type == 'pdf'">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+                
+            </div>
+        </div>
+    </template>
+
+</odoo>
+<!--
+مؤسسة عمير عبدالله سليمان التويجري
+للالات والمعدات
+مدينة الرياض - حي ثليم - شارع عمر المختار - 3139
+RCSB3139-12646-7436-
+س.ت. 1010822933
+الرقم الضريبي: 311392223300003-->

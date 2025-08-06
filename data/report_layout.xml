@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data >
+    
+        <record id="motakamel" model="report.layout">
+            <field name="name">Motakamel Layout </field>
+            <field name="sequence">6</field>
+            <field name="view_id" ref="Almotakamel_invoice.moutakamel_extenal_layout"/>
+        </record>
+    
+    </data>
+    
+
+</odoo>
