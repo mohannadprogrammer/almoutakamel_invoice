@@ -6,14 +6,15 @@
             <div class="row"
                 style="width:100%; border-bottom: 1px solid black; padding-bottom: 10px;">
                 <div class="col-4" style="top-padding: 10px;">
-                    <div class="w-150">
-                        <strong>Omair Abdullah Sulaiman Al- Tuwaijri Est. for Machinery and
+                    <!-- <div class="w-150"> -->
+                        <!-- <strong>Omair Abdullah Sulaiman Al- Tuwaijri Est. for Machinery and
                             Equipment</strong>
                         <div>Riyadh City - Thuleem Dist. - Omar Al</div>
                         <div>Mukhtar St.-3139-7436-12646-RCSB3139</div>
                         <div>C.R: 1010822933</div>
-                        <div>VAT: 311392223300003</div>
-                    </div>
+                        <div>VAT: 311392223300003</div> -->
+                        <div t-field="company.company_details"/>
+                    <!-- </div> -->
                 </div>
                 <div class="col-4"
                     style=" green; top-padding: 10px; text-align: center; vertical-align: middle;">
@@ -23,12 +24,14 @@
                 </div>
                 <div class="col-4" style="  top-padding: 10px;">
                     <div class="w-150 " dir="rtl">
-                        <strong>مؤسسة عمير عبدالله سليمان التويجري</strong>
+                        <div t-field="company.with_context(lang='ar_001').company_details"/>
+
+                        <!-- <strong>مؤسسة عمير عبدالله سليمان التويجري</strong>
                         <div>مدينة الرياض - حي ثليم </div>
                         <div> شارع عمر المختار - 3139
                             RCSB3139-12646-7436-</div>
                         <div>س.ت: 1010822933</div>
-                        <div>الرقم الضريبي: 311392223300003</div>
+                        <div>الرقم الضريبي: 311392223300003</div> -->
                     </div>
 
                 </div>
