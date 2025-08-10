@@ -1,0 +1,1 @@
+#inherit company model odoo

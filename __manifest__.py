@@ -13,7 +13,8 @@
         'web'
     ],
     'data': [
-        'templates/motakamel_extenal_layout.xml'
+        'templates/motakamel_extenal_layout.xml',
+        'templates/report_invoice.xml',
     ],
     'demo': [
         'data/report_layout.xml'
