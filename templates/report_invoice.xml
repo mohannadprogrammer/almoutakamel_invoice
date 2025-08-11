@@ -86,65 +86,61 @@
                 <table class="table table-sm o_main_table table-borderless" dir="rtl">
                     <tr>
 
-                        <td>العميل</td>
-                        <td>:</td>
+                        <td style="background-color:lightgray;">العميل</td>
                         <td style="text-align:center;">
                             <span t-field="o.partner_id.name" />
                         </td>
-                        <td>الرقم الضريبي</td>
-                        <td>:</td>
+                        <td style="background-color:lightgray;">الرقم الضريبي</td>
+
                         <td style="text-align:center;">
                             <span t-field="o.partner_id.vat" />
                         </td>
 
                     </tr>
                     <tr>
-                        <td>رقم العاتف</td>
-                        <td>:</td>
+                        <td style="background-color:lightgray;">رقم العاتف</td>
+
                         <td style="text-align:center;">
                             <span t-field="o.partner_id.phone" />
                         </td>
-                        <td>السجل التجاري</td>
-                        <td>:</td>
+                        <td style="background-color:lightgray;">السجل التجاري</td>
+
                         <td style="text-align:center;">
-                            <span t-field="o.partner_id.vat" />
+                            <span t-field="o.partner_id.company_registry" />
                         </td>
                     </tr>
 
                     <tr>
-                        <td>العنوان</td>
-                        <td>:</td>
+                        <td style="background-color:lightgray;">العنوان</td>
+
                         <td style="text-align:center;">
                             <span t-field="o.partner_id.street" />
                         </td>
-                        <td>المدينة</td>
-                        <td>:</td>
+                        <td style="background-color:lightgray;">المدينة</td>
                         <td style="text-align:center;">
                             <span t-field="o.partner_id.city" />
                         </td>
-                        <td>اسم الحي</td>
-                        <td>:</td>
+                        <td style="background-color:lightgray;">اسم الحي</td>
                         <td style="text-align:center;">
-                            <span t-field="o.partner_id.street2" />
+                            <span t-field="o.partner_id.district" />
                         </td>
 
                     </tr>
 
                     <tr>
-                        <td>الرمز البريدي</td>
-                        <td>:</td>
+                        <td style="background-color:lightgray;">الرمز البريدي</td>
+
                         <td style="text-align:center;">
                             <span t-field="o.partner_id.zip" />
                         </td>
-                        <td>رقم المبنى</td>
-                        <td>:</td>
+                        <td style="background-color:lightgray;">رقم المبنى</td>
+
                         <td style="text-align:center;">
-                            <span t-field="o.partner_id.city" />
+                            <span t-field="o.partner_id.building_no" />
                         </td>
-                        <td>رقم اضافي </td>
-                        <td>:</td>
+                        <td style="background-color:lightgray;">رقم اضافي </td>
                         <td style="text-align:center;">
-                            <span t-field="o.partner_id.mobile" />
+                            <span t-field="o.partner_id.additional_no" />
                         </td>
 
                     </tr>
@@ -154,13 +150,14 @@
                 <!-- customer address -->
                 <t t-set="current_discount" t-value="0" />
                 <t t-set="current_price" t-value="0" />
+                <t t-set="current_qty" t-value="0" />
 
                 <t t-set="current_subtotal" t-value="0" />
                 <t t-set="current_total" t-value="0" />
                 <table class="table table-sm o_main_table table-bordered"
                     name="invoice_line_table" dir="rtl">
                     <thead>
-                        <tr>
+                        <tr style="background-color:#99ffeb;">
                             <th name="th_sequence" class="text-center">
                                 <span>Item No </span>
                                 <br />
@@ -221,6 +218,7 @@
                             <t t-set="current_subtotal"
                                 t-value="current_subtotal + line.price_subtotal" />
                             <t t-set="current_total" t-value="current_total + line.price_total" />
+                            <t t-set="current_qty" t-value="current_qty + line.quantity" />
                             <t t-set="current_price" t-value="current_price + line.price_unit" />
                             <t t-set="current_discount"
                                 t-value="round(current_discount+((line.discount/100)*line.price_total) , 2 )" />
@@ -341,27 +339,44 @@
 
                     <!-- QR Code -->
                     <div class="col-6 text-center">
-                        <div class="qrcode me-3" id="qrcode_image">
-                            <t t-set="qr_code_url" t-value="o._generate_qr_code(silent_errors=True)" />
-                            <p t-if="qr_code_url" class="position-relative mb-0">
-                                <img t-att-src="qr_code_url" />
-                                <img src="/account/static/src/img/Odoo_logo_O.svg"
-                                    id="qrcode_odoo_logo"
-                                    class="top-50 start-50 position-absolute bg-white border border-white border-3 rounded-circle"
-                                />
-                            </p>
-                        </div>
-                        <!-- <t t-if="o.qr_code">
-                            <img t-att-src="'data:image/png;base64,' + o.qr_code" alt="QR Code"
-                                style="width: 150px; height: 150px;" />
-                        </t>
-                        <t t-else="">
-                            <img src="/web/static/src/img/placeholder.png" alt="QR Code"
-                                style="width: 150px; height: 150px;" />
-                        </t> -->
-                        <p>Scan the QR code to view invoice details</p>
+                        <table class="table table-sm o_main_table table-borderless" dir="rtl">
+                            <tr>
+                                <td> صنف<span t-out="len(lines)">
+                                        Total Qty
+                                    </span>
+                                </td>
+                                <td style="text-align: center;">
+                                    <img t-attf-src="data:image/png;base64, {{o.qr}}" />
+                                    <p>Scan the QR code to view invoice details</p>
+                                </td>
+                                <td> الكمية الاجمالية <span t-out="current_qty">
+                                        الكمية الاجمالية
+                                    </span>
+
+                                </td>
+                            </tr>
+
+                        </table>
+                       
+
+
                     </div>
                 </div>
+                <div class="row" style="text-align:center; margin-top: 20px;">
+                    <div class="col-6">
+                    </div>
+                    <div class="col-6">
+                        <table class="table table-sm o_main_table table-bordered" dir="rtl">
+                        <tr>
+                            <td style="text-align:center;">
+                                  فقط <span t-out="o.ar_total_word" /> لاغير 
+                            </td>
+                            
+                        </tr>
+                    </table>
+                </div>
+                    </div>
+                    
                 <!-- bank numbeer row  -->
                 <div class="row" style="text-align:center; margin-top: 20px;">
                     <table class="table table-sm o_main_table table-bordered" dir="rtl">

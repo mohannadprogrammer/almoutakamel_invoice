@@ -57,7 +57,7 @@
           
             <div class="text-center">
                 <div t-field="company.report_footer"
-                    style="border: 2px solid black ; font-style:bold;"> Company Report Footer</div>
+                    style="border: 2px solid black ; font-style:bold; padding:0px ;magin:0px;"> Company Report Footer</div>
                 <div t-if="report_type == 'pdf'">
                     <div class="row" style="font-size: 11px; color: black;">
                         <div class="col-4">
