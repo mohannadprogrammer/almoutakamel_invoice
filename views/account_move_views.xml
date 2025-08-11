@@ -6,26 +6,47 @@
             account.move.view.form.inherit.advanced.vat.invoice
         </field>
         <field name="model">account.move</field>
-        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
+            <xpath expr="//div[@class='o_col']" position="after">
+                <field name="available_payment_method_line_ids" invisible="1" />
+                <field name="available_payment_journal_ids" invisible="1" />
+
+                <label for="mo_payment_type" style="font-weight:bold;" string="payment Type"
+                    invisible="state != 'draft' and not mo_payment_type" />
+                <field name="mo_payment_type" nolabel="1"
+                    invisible="state != 'draft' and not mo_payment_type" />
+
+                <label for="payment_journal_id" style="font-weight:bold;" string="payment Journal"
+                    invisible="mo_payment_type != 'ghair_ajil'" />
+                <field name="payment_journal_id"
+                    domain="[('id', 'in', available_payment_journal_ids)]" nolabel="1"
+                    invisible="mo_payment_type != 'ghair_ajil'" />
+
+                <label for="payment_method_id" style="font-weight:bold;" string="payment method"
+                    invisible="mo_payment_type != 'ghair_ajil'" />
+                <field name="payment_method_id" nolabel="1"
+                    invisible="mo_payment_type != 'ghair_ajil'" />
+
+            </xpath>
             <xpath expr="//notebook/page[@id='other_tab']" position="after">
                 <page string="QR Code"
-                      invisible="qr_page != True">
+                    invisible="qr_page != True">
                     <group>
                         <group>
-                            <label for="qr"/>
+                            <label for="qr" />
                             <field name="qr" widget='image' nolabel="1"
-                                   invisible="state != 'posted'"/>
-                            <field name="qr_button" invisible="1"/>
-                            <field name="qr_page" invisible="1"/>
+                                invisible="state != 'posted'" />
+                            <field name="qr_button" invisible="1" />
+                            <field name="qr_page" invisible="1" />
                         </group>
                     </group>
                 </page>
             </xpath>
             <xpath expr="header" position="inside">
                 <button name="generate_qr_button" string="Generate QR"
-                        type="object"
-                        invisible="qr_button == False or state != 'posted'"/>
+                    type="object"
+                    invisible="qr_button == False or state != 'posted'" />
             </xpath>
         </field>
     </record>
